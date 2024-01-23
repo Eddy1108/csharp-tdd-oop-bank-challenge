@@ -19,6 +19,16 @@ namespace Boolean.CSharp.Main
 		Rejected
 	}
 
+    public enum AccountBranch
+    {
+		None,
+		NewYork,
+		Stockholm,
+		Amsterdam,
+		London,
+		HongKong
+    }
+
 	public interface IBankTransaction
 	{
 

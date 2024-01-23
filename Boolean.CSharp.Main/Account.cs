@@ -10,9 +10,12 @@ namespace Boolean.CSharp.Main
 	{
 		public List<IBankTransaction> AccountTransactions { get; set; }
 
-		public Account()
+        public AccountBranch Branch { get; set; }
+
+		public Account(AccountBranch branch = AccountBranch.None)
 		{
 			AccountTransactions = new List<IBankTransaction>();
+			Branch = branch;
 		}
 
 		public bool GenerateStatement()
@@ -69,5 +72,17 @@ namespace Boolean.CSharp.Main
 			AccountTransactions.Add(entry);
 		}
 
-	}
+        public decimal GetCalculatedBalance()
+        {
+            decimal totalSum = 0;
+
+            foreach (var transaction in AccountTransactions)
+            {
+                if (transaction.Type == TransactionType.Credit) { totalSum += transaction.Amount; }
+				else if (transaction.Type == TransactionType.Debit) { totalSum -= transaction.Amount; }
+            }
+
+			return totalSum;
+        }
+    }
 }
